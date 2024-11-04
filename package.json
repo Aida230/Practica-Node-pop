@@ -7,7 +7,8 @@
     "start": "node --watch ./bin/server.js",
     "debug": "cross-env PORT=4444 DEBUG=node-pop:* npm start",
     "dev": "cross-env PORT=4444 npm start",
-    "lint": "standard"
+    "lint": "standard",
+    "initDB": "node initDB.js"
   },
   "dependencies": {
     "cookie-parser": "1.4.7",
