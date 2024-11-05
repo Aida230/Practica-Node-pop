@@ -4,6 +4,7 @@ import createError from 'http-errors'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import connectMongoose from './lib/connectMongoose.js'
+import * as homeController from './controllers/homeController.js'
 
 await connectMongoose()
 console.log('Conectado a MongoDB')
@@ -16,6 +17,8 @@ const app = express()
 // view engine setup
 app.set('views', join(import.meta.dirname, 'views'))
 app.set('view engine', 'ejs')
+
+
 
 // middlewares
 
@@ -30,7 +33,12 @@ app.use(cookieParser())
 // set the folder where statis resources will be served
 app.use(express.static(join(import.meta.dirname, 'public')))
 
-// Routing
+
+
+// Routing rutas de la aplicacion
+//productos page
+app.get('/productos', homeController.productos)//mio
+
 
 // homepage
 app.use('/', indexRouter)
@@ -41,6 +49,7 @@ app.use('/users', usersRouter)
 app.use(function (req, res, next) {
   next(createError(404))
 })
+
 
 // error handler
 app.use(function (err, req, res, next) {
