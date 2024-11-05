@@ -8,6 +8,7 @@ import { createServer } from 'node:http'
 import app from '../app.js'
 import debugLib from 'debug'
 
+
 const debug = debugLib('npx-express-generator-ejs:server')
 
 /**

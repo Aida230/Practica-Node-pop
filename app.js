@@ -5,19 +5,22 @@ import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import connectMongoose from './lib/connectMongoose.js'
 import * as homeController from './controllers/homeController.js'
+import indexRouter from './routes/index.js'
+import usersRouter from './routes/users.js'
+
 
 await connectMongoose()
 console.log('Conectado a MongoDB')
 
-import indexRouter from './routes/index.js'
-import usersRouter from './routes/users.js'
-
 const app = express()
 
-// view engine setup
-app.set('views', join(import.meta.dirname, 'views'))
-app.set('view engine', 'ejs')
+app.locals.appName = 'Node-pop'
 
+
+
+// view engine setup
+app.set('views', join(import.meta.dirname, 'views')) //MOTOR DE PLANTILLS
+app.set('view engine', 'ejs')
 
 
 // middlewares
@@ -36,14 +39,17 @@ app.use(express.static(join(import.meta.dirname, 'public')))
 
 
 // Routing rutas de la aplicacion
+
+
 //productos page
 app.get('/productos', homeController.productos)//mio
 
-
 // homepage
 app.use('/', indexRouter)
+
 // user page
 app.use('/users', usersRouter)
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
