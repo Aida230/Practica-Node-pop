@@ -8,6 +8,7 @@ import * as homeController from './controllers/homeController.js'
 import * as loginController from './controllers/loginController.js'
 import indexRouter from './routes/index.js'
 import usersRouter from './routes/users.js'
+import loginRouter from './routes/login.js'
 
 
 await connectMongoose()
@@ -41,12 +42,15 @@ app.use(express.static(join(import.meta.dirname, 'public')))
 
 // Routing rutas de la aplicacion
 
-
 // homepage
 app.use('/', indexRouter)
 
 // user page
 app.use('/users', usersRouter)
+
+
+// user login
+app.use('/login', loginRouter)
 
 
 
