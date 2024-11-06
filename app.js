@@ -41,9 +41,6 @@ app.use(express.static(join(import.meta.dirname, 'public')))
 // Routing rutas de la aplicacion
 
 
-//productos page
-app.get('/productos', homeController.productos)//mio
-
 // homepage
 app.use('/', indexRouter)
 

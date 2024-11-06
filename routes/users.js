@@ -1,3 +1,5 @@
+//Pagina para peticiones get del usuario
+
 import { Router } from 'express'
 const router = Router()
 
