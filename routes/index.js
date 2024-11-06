@@ -10,12 +10,11 @@ const router = Router()
 router.get('/', async (req, res, next) => {
   try {
     const products = await getProductsJSON(req, res, next);// Obtenemos los productos directamente desde el controlador
-    res.render('homepage', { title: 'NODE-POP', products });// Renderizamos la página de inicio pasando los productos
+    res.render('header', { title: 'NODE-POP', products });// Renderizamos la página de inicio pasando los productos
 
   } catch (error) {
     next(error);
   }
 });
-
 
 export default router

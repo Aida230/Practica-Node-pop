@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import connectMongoose from './lib/connectMongoose.js'
 import * as homeController from './controllers/homeController.js'
+import * as loginController from './controllers/loginController.js'
 import indexRouter from './routes/index.js'
 import usersRouter from './routes/users.js'
 
@@ -46,6 +47,7 @@ app.use('/', indexRouter)
 
 // user page
 app.use('/users', usersRouter)
+
 
 
 // catch 404 and forward to error handler

@@ -8,3 +8,4 @@ export const getProductsJSON = async () => {
         throw new Error('Error al obtener los productos JSON');
     }
 };
+
