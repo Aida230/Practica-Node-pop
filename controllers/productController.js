@@ -13,7 +13,7 @@ export async function postNew(req, res, next) {
     // TODO validaciones
 
     // creo una instancia de producto en memoria
-    const agent = new Product({
+    const product = new Product({
       name,
       price,
       owner: userId
@@ -30,11 +30,11 @@ export async function postNew(req, res, next) {
 
 export async function deleteProduct(req, res, next) {
   const userId = req.session.userId
-  const agentId = req.params.productId
+  const productId = req.params.productId
 
   // validar que el elemento que queremos borrar es propidad
   // del usuario logado!!!!!
-  const agent = await Product.findOne({ _id: agentId })
+  const product = await Product.findOne({ _id: productId })
 
   // verificar que existe
   if (!product) {

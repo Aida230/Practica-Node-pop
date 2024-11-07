@@ -1,6 +1,5 @@
 
 
-
     <%- include('header.ejs') %>
 
     <div class="container">
@@ -15,7 +14,7 @@
       <% // contenido para usuarios logados %>
       <% if (session.userId) { %>
         <% products.forEach(product => { %>
-          <p><%= product.name %> <%= product.price %> <%= product.tag %> <a href="/products/delete/<%= product.id %>"><i class="bi bi-trash"></i></a></p>
+          <p><%= product.name %> <%= product.price %> <%= product.tag %> <a href="/product/delete/<%= product.id %>"><i class="bi bi-trash"></i></a></p>
         <% }) %>
       <% } %>  
     

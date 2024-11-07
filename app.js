@@ -6,7 +6,7 @@ import logger from 'morgan'
 import connectMongoose from './lib/connectMongoose.js'
 import * as homeController from './controllers/homeController.js'
 import * as loginController from './controllers/loginController.js'
-import * as productsController from './controllers/productsController.js'
+import * as productController from './controllers/productController.js'
 import * as sessionManager from './lib/sessionManager.js'
 
 await connectMongoose()
@@ -50,9 +50,9 @@ app.post('/login', loginController.postLogin)
 app.all('/logout', loginController.logout)
 
 // private pages
-app.get('/products/new', sessionManager.isLoggedIn, productsController.index)
-app.post('/products/new', sessionManager.isLoggedIn, productsController.postNew)
-app.get('/products/delete/:productId', sessionManager.isLoggedIn, productsController.deleteProduct)
+app.get('/product/new', sessionManager.isLoggedIn, productController.index)
+app.post('/product/new', sessionManager.isLoggedIn, productController.postNew)
+app.get('/product/delete/:productId', sessionManager.isLoggedIn, productController.deleteProduct)
 
 
 
