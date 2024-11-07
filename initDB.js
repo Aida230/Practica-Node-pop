@@ -25,9 +25,9 @@ async function initProducts() {
 
   // create initial products
   const insertResult = await Product.insertMany([
-    { name: 'cafetera', price: 29.99 },
-    { name: 'tostadora', price: 42.50 },
-    { name: 'microondas', price: 23.70 }
+    { name: 'cafetera', price: 29.99, owner: admin._id },
+    { name: 'tostadora', price: 42.50, owner: user1._id },
+    { name: 'microondas', price: 23.70, owner: user2._id }
   ])
   console.log(`Created ${insertResult.length} products.`)
 }

@@ -1,15 +1,13 @@
 import { join } from 'node:path'
-import express from 'express'
+import express, { json, urlencoded } from 'express';
 import createError from 'http-errors'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
 import connectMongoose from './lib/connectMongoose.js'
 import * as homeController from './controllers/homeController.js'
 import * as loginController from './controllers/loginController.js'
-import indexRouter from './routes/index.js'
-import usersRouter from './routes/users.js'
-import loginRouter from './routes/login.js'
-
+import * as productsController from './controllers/productsController.js'
+import * as sessionManager from './lib/sessionManager.js'
 
 await connectMongoose()
 console.log('Conectado a MongoDB')
@@ -42,15 +40,19 @@ app.use(express.static(join(import.meta.dirname, 'public')))
 
 // Routing rutas de la aplicacion
 
-// homepage
-app.use('/', indexRouter)
 
-// user page
-app.use('/users', usersRouter)
+app.use(sessionManager.middleware, sessionManager.useSessionInViews) //aqui usamos el sessionManager
 
+// public pages
+app.get('/', homeController.index)
+app.get('/login', loginController.index)
+app.post('/login', loginController.postLogin)
+app.all('/logout', loginController.logout)
 
-// user login
-app.use('/login', loginRouter)
+// private pages
+app.get('/products/new', sessionManager.isLoggedIn, productsController.index)
+app.post('/products/new', sessionManager.isLoggedIn, productsController.postNew)
+app.get('/products/delete/:productId', sessionManager.isLoggedIn, productsController.deleteProduct)
 
 
 

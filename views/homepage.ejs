@@ -1,18 +1,27 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+
+
+    <%- include('header.ejs') %>
+
+    <div class="container">
     
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <h1>Lista de Productos</h1>
-    <pre><%= JSON.stringify(products, null, 2) %></pre>
-
-
-
+      <p>User ID: <%= session.userId %></p>
+ 
+      <% // contenido para usuarios NO logados %>
+      <% if (!session.userId) { %>
+        <p>Para ver el contenido debes hacer <a href="/login">login</a></p>
+      <% } %>
+    
+      <% // contenido para usuarios logados %>
+      <% if (session.userId) { %>
+        <% products.forEach(product => { %>
+          <p><%= product.name %> <%= product.price %> <%= product.tag %> <a href="/products/delete/<%= product.id %>"><i class="bi bi-trash"></i></a></p>
+        <% }) %>
+      <% } %>  
+    
+    </div>
+    
+    <%- include('footer.ejs') %>
 
 
   
