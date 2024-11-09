@@ -19,10 +19,15 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
+
+          <!-- este hace que solo aparezca nuevos productos cuando me loge-->
+          <% if (session.userId) { %>
           <li class="nav-item">
             <a class="nav-link" href="/product/new">New Product</a>
           </li>
+          <% } %>
         </ul>
+
         <form class="d-flex" role="search">
           <% if (session.userId) { %>
             <a href="/logout" class="btn btn-outline-success" type="submit">Logout</a>

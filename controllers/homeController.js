@@ -16,6 +16,7 @@ export async function index(req, res, next) {
     // Si el usuario tiene productos, los agregamos a `res.locals` para pasarlos a la vista
     res.locals.products = products.length > 0 ? products : [];
 
+
     // Renderizamos la vista de inicio con los productos del usuario
     res.render('homepage');
   } catch (error) {

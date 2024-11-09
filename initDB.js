@@ -23,11 +23,19 @@ async function initProducts() {
   const deleteResult = await Product.deleteMany()
   console.log(`Deleted ${deleteResult.deletedCount} products.`)
 
+
+  //esta promesa hace que me reconozca los owner
+  const [admin, user1, user2] = await Promise.all([
+    User.findOne({ email: 'admin@example.com' }),
+    User.findOne({ email: 'user1@example.com' }),
+    User.findOne({ email: 'user2@example.com' }),
+  ])
+
   // create initial products
   const insertResult = await Product.insertMany([
-    { name: 'cafetera', price: 29.99, owner: admin._id },
-    { name: 'tostadora', price: 42.50, owner: user1._id },
-    { name: 'microondas', price: 23.70, owner: user2._id }
+    { name: 'cafetera', price: 29.99, owner: admin._id, tags: ["lifestyle"]},
+    { name: 'tostadora', price: 42.50, owner: user1._id, tags: ["work"]},
+    { name: 'microondas', price: 23.70, owner: user2._id, tags: ["motor", "mobile"]}
   ])
   console.log(`Created ${insertResult.length} products.`)
 }
