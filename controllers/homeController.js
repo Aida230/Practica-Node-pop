@@ -6,7 +6,7 @@ export async function index(req, res, next) {
 
   if (!userId) {
     // Si no hay usuario en sesión, redirigimos al login
-    return res.redirect('/login');
+    return res.render('homepage')
   }
 
   try {

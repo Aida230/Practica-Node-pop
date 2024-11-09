@@ -7,12 +7,12 @@
     <p>Para ver el contenido debes hacer <a href="/login">login</a></p>
   <% } %>
 
-  <!-- Información del usuario -->
-  <p><strong>User:</strong> <%= session.userName %></p>
-
+  
   <!-- Contenido para usuarios logados -->
-  <h4>My Products</h4>
   <% if (session.userId) { %>
+    <h4>My Products</h4>
+    <!-- Información del usuario -->
+    <p><strong>User:</strong> <%= session.userName %></p>
     <table class="table">
       <thead>
         <tr>

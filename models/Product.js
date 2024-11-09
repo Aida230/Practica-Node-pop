@@ -5,7 +5,10 @@ const productSchema = new Schema({
   name: { type: String, unique: true },
   price: { type: Number, min: 0.001 },
   image: { type: String },
-  tags: [String],
+  tags: {
+    type: [String],
+    enum: ['work', 'lifestyle', 'motor', 'mobile',]
+  },
   owner: { type: Schema.Types.ObjectId, ref: 'User' }
 }, {
   // collection: 'productos' // para forzar el nombre de la colección y evitar pluralización
