@@ -8,7 +8,7 @@ export function index(req, res, next) {
 export async function postNew(req, res, next) {
   try {
     const userId = req.session.userId
-    const { name, price, image, tags } = req.body
+    const { name, price, tags } = req.body
 
     // TODO validaciones
 
@@ -16,8 +16,8 @@ export async function postNew(req, res, next) {
     const product = new Product({
       name,
       price,
-      image,
       tags,
+      avatar: req.file.filename,
       owner: userId
     })
 

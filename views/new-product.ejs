@@ -4,7 +4,7 @@
 
   <h1>New Product</h1>
 
-  <form method="POST">
+  <form method="POST" enctype="multipart/form-data">
 
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Name</label>
@@ -17,8 +17,8 @@
     </div>
 
     <div class="mb-3">
-      <label for="imageUrl" class="form-label">URL Image</label>
-      <input type="text" name="image" class="form-control" id="imageUrl" placeholder="URL image">
+      <label for="customFile" class="form-label">Avatar</label>
+      <input type="file" name="avatar" class="form-control" id="imageUrl" placeholder="customFile">
     </div>
 
     <div class="mb-3">

@@ -18,7 +18,7 @@
         <tr>
           <th>Name</th>
           <th>Price</th>
-          <th>Image</th>
+          <th>Avatar</th>
           <th>Tags</th>
           <th>Delete</th>
         </tr>
@@ -28,7 +28,7 @@
           <tr>
             <td><%= product.name %></td>
             <td><%= product.price %> euros</td>
-            <td><img src="<%= product.image %>" alt="<%= product.name %>" width="50" /></td>
+            <td><img src="<%= product.avatar ? `/avatars/${product.avatar}` : 'https://placehold.co/50' %>" alt="avatar" width="50" /></td>
             <td>  <% product.tags.forEach(function(tag) { %>
               <span><%= tag %></span><br />
             <% }); %></td>
