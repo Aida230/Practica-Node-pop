@@ -22,6 +22,15 @@ Para ejecutar este proyecto, necesitas tener instalados:
     ```bash
     npm install
 
+3. En el primer despliegue copia .env.example desde .env y customiza las variables de entorno
+    ```sh
+    cp.env.example .env
+    ```
+4. Puedes inicializar la base de datos para crear una inicial
+    ```js
+    npm run initDB
+    ```
+
 ## Comandos
 
 Los scripts definidos en `package.json` permiten realizar tareas comunes de desarrollo y despliegue:
