@@ -10,14 +10,13 @@ export async function postNew(req, res, next) {
     const userId = req.session.userId
     const { name, price, tags } = req.body
 
-    // TODO validaciones
-
+    
     // creo una instancia de producto en memoria
     const product = new Product({
       name,
       price,
       tags,
-      avatar: req.file.filename,
+      avatar: req.file ? req.file.filename: null, //para que la imagen sea opcional
       owner: userId
     })
 
