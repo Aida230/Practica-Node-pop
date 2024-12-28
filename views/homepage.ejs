@@ -1,40 +1,41 @@
 <%- include('header.ejs') %>
 
 <div class="container">
+  <h1><%= __('PROOF') %></h1>
 
   <!-- Contenido para usuarios NO logados -->
   <% if (!session.userId) { %>
-    <p>Para ver el contenido debes hacer <a href="/login">login</a></p>
+    <p><%= __('To see the content you must do ') %><a href="/login"><%= __('Login') %></a></p>
   <% } %>
 
   
   <!-- Contenido para usuarios logados -->
   <% if (session.userId) { %>
-    <h4>My Products</h4>
+    <h4><%= __('My products') %></h4>
     <!-- Información del usuario -->
-    <p><strong>User:</strong> <%= session.userName %></p>
+    <p><strong><%= __('User:') %></strong> <%= session.userName %></p>
     <table class="table">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Price</th>
-          <th>Avatar</th>
-          <th>Tags</th>
-          <th>Delete</th>
+          <th><%= __('Name') %></th>
+          <th><%= __('Price') %></th>
+          <th><%= __('Avatar') %></th>
+          <th><%= __('Tags') %></th>
+          <th><%= __('Delete') %></th>
         </tr>
       </thead>
       <tbody>
         <% products.forEach(product => { %>
           <tr>
             <td><%= product.name %></td>
-            <td><%= product.price %> euros</td>
+            <td><%= product.price %> <%= __('euros') %></td>
             <td><img src="<%= product.avatar ? `/avatars/${product.avatar}` : 'https://placehold.co/50' %>" alt="avatar" width="50" /></td>
             <td>  <% product.tags.forEach(function(tag) { %>
               <span><%= tag %></span><br />
             <% }); %></td>
             <td>
               <a href="/product/delete/<%= product.id %>" class="text-danger">
-                <i class="bi bi-trash"></i> Delete
+                <i class="bi bi-trash"></i> <%= __('Delete') %>
               </a>
             </td>
           </tr>

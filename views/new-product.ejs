@@ -2,43 +2,43 @@
 
 <div class="container">
 
-  <h1>New Product</h1>
+  <h1><%= __('New product') %></h1>
 
   <form method="POST" enctype="multipart/form-data">
 
     <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Name</label>
+      <label for="exampleInputEmail1" class="form-label"><%= __('Name') %></label>
       <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Name" required>
     </div>
 
     <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Price</label>
+      <label for="exampleInputPassword1" class="form-label"><%= __('Price') %></label>
       <input type="number" name="price" class="form-control" id="exampleInputPassword1" placeholder="Price" required>
     </div>
 
     <div class="mb-3">
-      <label for="customFile" class="form-label">Avatar</label>
+      <label for="customFile" class="form-label"><%= __('Avatar') %></label>
       <input type="file" name="avatar" class="form-control" id="imageUrl" placeholder="customFile">
     </div>
 
     <div class="mb-3">
-      <label class="form-label">Tags</label>
+      <label class="form-label"><%= __('Tags') %></label>
       <div>
-        <input type="checkbox" name="tags" value="work" id="work"> Work
+        <input type="checkbox" name="tags" value="work" id="work"> <%= __('Work') %>
       </div>
       <div>
-        <input type="checkbox" name="tags" value="lifestyle" id="lifestyle"> Lifestyle
+        <input type="checkbox" name="tags" value="lifestyle" id="lifestyle"> <%= __('Lifestyle') %>
       </div>
       <div>
-        <input type="checkbox" name="tags" value="motor" id="motor"> Motor
+        <input type="checkbox" name="tags" value="motor" id="motor"> <%= __('Motor') %>
       </div>
       <div>
-        <input type="checkbox" name="tags" value="mobile" id="mobile"> Mobile
+        <input type="checkbox" name="tags" value="mobile" id="mobile"> <%= __('Mobile') %>
       </div>
     </div>
     
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary"><%= __('Submit') %></button>
 
   </form>
 </div>

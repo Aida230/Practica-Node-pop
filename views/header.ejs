@@ -17,22 +17,22 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
+            <a class="nav-link active" aria-current="page" href="/"><%= __('Home') %></a>
           </li>
           
           <!-- este hace que solo aparezca nuevos productos cuando me loge-->
           <% if (session.userId) { %>
           <li class="nav-item">
-            <a class="nav-link" href="/product/new">New Product</a>
+            <a class="nav-link" href="/product/new"><%= __('New product') %></a>
           </li>
           <% } %>
         </ul>
 
         <form class="d-flex" role="search">
           <% if (session.userId) { %>
-            <a href="/logout" class="btn btn-outline-success" type="submit">Logout</a>
+            <a href="/logout" class="btn btn-outline-success" type="submit"><%= __('Logout') %></a>
           <% } else { %>
-            <a href="/login" class="btn btn-outline-success" type="submit">Login</a>
+            <a href="/login" class="btn btn-outline-success" type="submit"><%= __('Login') %></a>
           <% } %>
         </form>
       </div>
