@@ -10,6 +10,7 @@ import * as productController from './controllers/productController.js'
 import * as sessionManager from './lib/sessionManager.js'
 import upload from './lib/uploadConfigure.js'
 import i18n from './lib/i18nConfigure.js'
+import * as langController from './controllers/langController.js'
 
 await connectMongoose()
 console.log('Conectado a MongoDB')
@@ -21,7 +22,7 @@ app.locals.appName = 'Node-pop'
 
 
 // view engine setup
-app.set('views', join(import.meta.dirname, 'views')) //MOTOR DE PLANTILLS
+app.set('views', join(import.meta.dirname, 'views')) //MOTOR DE PLANTILLAS
 app.set('view engine', 'ejs')
 
 
@@ -45,6 +46,7 @@ app.use(express.static(join(import.meta.dirname, 'public')))
 
 app.use(sessionManager.middleware, sessionManager.useSessionInViews) //aqui usamos el sessionManager
 app.use(i18n.init)
+app.get('/chance-locale/:locale', langController.chanceLocale)
 
 // public pages
 app.get('/', homeController.index)
