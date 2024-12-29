@@ -11,6 +11,7 @@ import * as sessionManager from './lib/sessionManager.js'
 import upload from './lib/uploadConfigure.js'
 import i18n from './lib/i18nConfigure.js'
 import * as langController from './controllers/langController.js'
+import * as apiProductsController from './controllers/api/apiProductsController.js'
 
 await connectMongoose()
 console.log('Conectado a MongoDB')
@@ -39,10 +40,11 @@ app.use(cookieParser())
 // set the folder where statis resources will be served
 app.use(express.static(join(import.meta.dirname, 'public')))
 
+//Rutas del API
 
+app.get('/api/products', apiProductsController.apiProductsList)
 
 // Rutas del webside!!
-
 
 app.use(sessionManager.middleware, sessionManager.useSessionInViews) //aqui usamos el sessionManager
 app.use(i18n.init)
