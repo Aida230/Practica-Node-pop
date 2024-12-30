@@ -45,4 +45,30 @@ Los scripts definidos en `package.json` permiten realizar tareas comunes de desa
 
 - **`npm run initDB`**: Ejecuta el script `initDB.js` para inicializar la base de datos (creación de tablas o carga de datos iniciales, según la configuración en el proyecto).
 
+## API
+Base URL: http://localhost:4444/api
+
+### Product list
+GET /api/products
+
+```json
+{
+    "results": [
+        {
+            "_id": "676da86d4b938c6ceb942019",
+            "name": "Juguete2",
+            "price": 123,
+            "avatar": "avatar-1735239789641-riotgames-secret-cinema.jpg",
+            "tags": [
+                "lifestyle"
+            ],
+            "owner": "676c3cbb9d8f7ca8be5fda13",
+            "__v": 0
+        },
+        // ...
+    ],
+    "count": 5
+}
+```
+
 
