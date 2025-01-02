@@ -19,6 +19,7 @@ productSchema.statics.list = function(filter, limit, skip, sort, fields) {
   const query = Product.find(filter)
   query.limit(limit)
   query.skip(skip)
+  query.collation({ locale: 'en', strength: 2 })//esto ignora las mayusculas, locale es el alfabeto, y strength es para sea case insensitive, ignora las mayusculas
   query.sort(sort)
   query.select(fields)
   return query.exec()

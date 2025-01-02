@@ -33,7 +33,7 @@ app.set('view engine', 'ejs')
 app.use(logger('dev'))
 // transforms json objects into js objects
 app.use(express.json())
-// transforms data sent by a form to a js object
+// transforms data sent by a form to a js object //parsear el body para que venga en formato urlencoded (formularios)
 app.use(express.urlencoded({ extended: false }))
 // cookie parser to get cookies from client
 app.use(cookieParser())
@@ -44,6 +44,8 @@ app.use(express.static(join(import.meta.dirname, 'public')))
 
 app.get('/api/products', apiProductsController.apiProductsList)
 app.get('/api/products/:productId', apiProductsController.apiProductGetOne)
+app.post('/api/products', upload.single('avatar'), apiProductsController.apiProductNew)
+
 
 // Rutas del webside!!
 
