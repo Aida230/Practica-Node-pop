@@ -43,6 +43,7 @@ app.use(express.static(join(import.meta.dirname, 'public')))
 //Rutas del API
 
 app.get('/api/products', apiProductsController.apiProductsList)
+app.get('/api/products/:productId', apiProductsController.apiProductGetOne)
 
 // Rutas del webside!!
 
@@ -71,14 +72,13 @@ app.use(function (req, res, next) {
 
 // error handler
 app.use(function (err, req, res, next) {
-
+  
+  
   //API error, enviar respuesta con JSON
   if (req.url.startsWith('/api/')) {
     res.json({ error: err.message })
     return
   }
-
-
 
   // set locals, only providing error in development
   res.locals.message = err.message

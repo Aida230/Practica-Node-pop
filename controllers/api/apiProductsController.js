@@ -40,3 +40,16 @@ export async function apiProductsList(req, res, next) {
   }
 
 }
+
+export async function apiProductGetOne(req, res, next) {
+  try {
+    const productId = req.params.productId
+
+    const product = await Product.findById(productId)
+
+    res.json({ result: product })
+  } catch (error) {
+    next(error)
+    
+  }
+}
