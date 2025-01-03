@@ -46,6 +46,7 @@ app.get('/api/products', apiProductsController.apiProductsList)
 app.get('/api/products/:productId', apiProductsController.apiProductGetOne)
 app.post('/api/products', upload.single('avatar'), apiProductsController.apiProductNew)
 app.put('/api/products/:productId', upload.single('avatar'), apiProductsController.apiProductUpdate)
+app.delete('/api/products/:productId', apiProductsController.apiProductDelete)
 
 
 // Rutas del webside!!

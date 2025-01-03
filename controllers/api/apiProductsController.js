@@ -84,7 +84,7 @@ export async function apiProductNew(req, res, next) {
 //ACTUALIZAR PRODUCTO
 export async function apiProductUpdate(req, res, next) {
   try {
-    //recoer los datos de entrada
+    //recoger los datos de entrada
     const productId = req.params.productId
     //lo habitual es que los datos nos vengan en el body
     const productData = req.body
@@ -96,6 +96,23 @@ export async function apiProductUpdate(req, res, next) {
     })
 
     res.json({ result: updateProduct })//no es necesario devolver el resultado, res.json() bastaria, pero es una buena practica
+  } catch (error) {
+    next(error)
+  }
+}
+
+//BORRAMOS PRODUCTO
+export async function apiProductDelete(req, res, next) {
+  try {
+    //recoger los parametros de entrada, en este caso es un id del producto que hay que borrar
+    const productId = req.params.productId
+    //borrarmos el producto segun el id
+    await Product.deleteOne({ _id: productId })
+    
+    //devolvemos directamen un status http 200 de todo ha ido bien
+    res.json()
+
+
   } catch (error) {
     next(error)
   }
