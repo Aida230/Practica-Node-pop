@@ -12,6 +12,7 @@ import upload from './lib/uploadConfigure.js'
 import i18n from './lib/i18nConfigure.js'
 import * as langController from './controllers/langController.js'
 import * as apiProductsController from './controllers/api/apiProductsController.js'
+import swaggerMiddleware from './lib/swaggerMiddleware.js';
 
 await connectMongoose()
 console.log('Conectado a MongoDB')
@@ -40,8 +41,11 @@ app.use(cookieParser())
 // set the folder where statis resources will be served
 app.use(express.static(join(import.meta.dirname, 'public')))
 
-//Rutas del API
 
+/*
+ * RUTAS DEL API
+*/
+//CRUD operations for products resorce (recursos)
 app.get('/api/products', apiProductsController.apiProductsList)
 app.get('/api/products/:productId', apiProductsController.apiProductGetOne)
 app.post('/api/products', upload.single('avatar'), apiProductsController.apiProductNew)
@@ -60,6 +64,7 @@ app.get('/', homeController.index)
 app.get('/login', loginController.index)
 app.post('/login', loginController.postLogin)
 app.all('/logout', loginController.logout)
+app.get('/api-doc', swaggerMiddleware)
 
 // private pages
 app.get('/product/new', sessionManager.isLoggedIn, productController.index)
