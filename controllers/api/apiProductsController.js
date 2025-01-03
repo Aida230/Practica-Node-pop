@@ -23,23 +23,16 @@ export async function apiProductsList(req, res, next) {
       filter.price = filterPrice
     }
 
-    /*
-    let normalizedSort = undefined
+    //destructuring con listas, la petciendo va a tardar un oco menos de esta forma, al hacerlo en paralelo
 
-    if (sort) {
-      const normalizeSort = sort => {
-        if (sort === 'name') return { name: 1 } //1 ascendente
-        if (sort === 'name-1') return { name: -1 } //-1 descendente
-        if (sort === 'price') return { price: 1 }
-        if (sort === 'price-1') return { price: -1 }
-      }
-      normalizedSort = normalizeSort(sort)
-    }
-    */
+    const [products, productCount] = await Promise.all([
+      Product.list(filter, limit, skip, sort, fields),
+      Product.countDocuments(filter)
+    ])
 
     //metodo estico lista
-    const products = await Product.list(filter, limit, skip, sort, fields)
-    const productCount = await Product.countDocuments(filter)
+    //const products = await Product.list(filter, limit, skip, sort, fields)
+    //const productCount = await Product.countDocuments(filter)
 
     res.json({ 
       results: products,
@@ -84,5 +77,26 @@ export async function apiProductNew(req, res, next) {
   } catch (error) {
     next(error)
     
+  }
+}
+
+
+//ACTUALIZAR PRODUCTO
+export async function apiProductUpdate(req, res, next) {
+  try {
+    //recoer los datos de entrada
+    const productId = req.params.productId
+    //lo habitual es que los datos nos vengan en el body
+    const productData = req.body
+    productData.avatar = req.file?.filename
+
+    //guardar el resultado
+    const updateProduct = await Product.findByIdAndUpdate(productId, productData, {
+      new: true //esto hace que te devuelva el valor actualizado
+    })
+
+    res.json({ result: updateProduct })//no es necesario devolver el resultado, res.json() bastaria, pero es una buena practica
+  } catch (error) {
+    next(error)
   }
 }

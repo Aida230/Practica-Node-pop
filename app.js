@@ -45,6 +45,7 @@ app.use(express.static(join(import.meta.dirname, 'public')))
 app.get('/api/products', apiProductsController.apiProductsList)
 app.get('/api/products/:productId', apiProductsController.apiProductGetOne)
 app.post('/api/products', upload.single('avatar'), apiProductsController.apiProductNew)
+app.put('/api/products/:productId', upload.single('avatar'), apiProductsController.apiProductUpdate)
 
 
 // Rutas del webside!!
