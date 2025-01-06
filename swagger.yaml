@@ -1,54 +1,194 @@
 openapi: 3.0.0
 info:
-  title: (title)
-  version: 0.0.0
-tags: []
+  title: API Documentation
+  version: 1.0.0
+tags:
+  - name: Authentication
+    description: Endpoints related to user authentication
+  - name: Products
+    description: CRUD operations for products
 paths:
-  /products:
-    get:
-      operationId: Products_list
-      parameters:
-        - name: filter
-          in: query
-          required: true
-          schema:
-            type: string
-          explode: false
+  /api/login:
+    post:
+      tags:
+        - Authentication
+      summary: Authenticate user and obtain JWT token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
       responses:
         '200':
-          description: The request has succeeded.
+          description: Authentication successful
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Product'
-  /products/{id}:
+                type: object
+                properties:
+                  token:
+                    type: string
+  /api/products:
     get:
-      operationId: Products_read
+      tags:
+        - Products
+      summary: Retrieve a list of products
       parameters:
-        - name: id
-          in: path
-          required: true
+        - name: name
+          in: query
+          required: false
           schema:
-            $ref: '#/components/schemas/Product'
+            type: string
+          description: Filter products by name
+        - name: price
+          in: query
+          required: false
+          schema:
+            type: number
+          description: Filter products by price
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Limit the number of products returned
+        - name: skip
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Number of products to skip
+        - name: sort
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Sorting criteria (e.g., name or price)
+        - name: fields
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Fields to include in the response
       responses:
         '200':
-          description: The request has succeeded.
+          description: A list of products
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  count:
+                    type: integer
+    post:
+      tags:
+        - Products
+      summary: Create a new product
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: number
+                avatar:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: Product created successfully
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Product'
+  /api/products/{productId}:
+    get:
+      tags:
+        - Products
+      summary: Retrieve a product by ID
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the product to retrieve
+      responses:
+        '200':
+          description: A single product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+    put:
+      tags:
+        - Products
+      summary: Update a product by ID
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the product to update
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: number
+                avatar:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Product updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+    delete:
+      tags:
+        - Products
+      summary: Delete a product by ID
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the product to delete
+      responses:
+        '200':
+          description: Product deleted successfully
 components:
   schemas:
     Product:
       type: object
-      required:
-        - name
-        - price
       properties:
         name:
           type: string
         price:
-          type: integer
-          format: int16
+          type: number
+        avatar:
+          type: string
+          description: URL or path to the product's avatar
